@@ -44,16 +44,16 @@ moz init
 #### 初始化配置文件
 ```json
 {
-    "name": "Moz",              // 项目名称
-    "serve": {                  // 本地服务器配置
-        "port": 8088,           // 本地服务器端口
-        "index": "index.html"   // 默认打开页面
+    "name": "Moz",             
+    "serve": {                 
+        "port": 8088,          
+        "index": "index.html"  
     },
-    "build": {                  // 编译选项
-        "hash": true,           // 使用 hash 缓存
-        "compress": true        // 压缩脚本和样式
+    "build": {                 
+        "hash": true,          
+        "compress": true       
     },
-    "ftp": {                    // FTP 服务器
+    "ftp": {                   
         "host": "",
         "user": "",
         "pass": "",
