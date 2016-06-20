@@ -1,0 +1,88 @@
+#!/usr/bin/env node
+
+var pkg      = require('../package.json');
+var path     = require('path');
+var swig     = require('swig');
+var program  = require('commander');
+var readline = require('readline');
+var file     = require('file-utils');
+var pwd      = process.env.pwd = path.resolve('.');
+var argv     = process.argv.slice(2);
+var conf     = require('../config/config.js');
+var colors   = require('colors');
+
+// 检查更新
+require('../update.js');
+
+// 处理 gulp 任务
+function gulptask() {
+    process.argv.push('--gulpfile', path.resolve(__dirname, '../gulpfile.js'));
+    require('gulp/bin/gulp');
+}
+
+program
+    .version(pkg.version);
+
+program
+    .command('init',   'init Moz project')
+    .command('serve',  'serve local development environment')
+    .command('build',  'complie the development files')
+    .command('deploy', 'deploy compiled files to ftp server')
+    .command('pack',   'pack compiled files to a zip')
+    .on('init', function() {
+        // 判断是否已经存在配置文件
+        var configJson = conf.parsePwd('moz.json');
+        var appFolder  = conf.parsePwd(conf.app);
+
+        if (file.exists(configJson)) {
+            console.log('%s is already exists!', 'moz.json'.red);
+        } else {
+            var rl = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+
+            rl.question('What is you project name: ', function(answer) {
+                function initFile(tmpl) {
+                    return swig.renderFile(tmpl, {
+                        name: answer
+                    });
+                }
+
+                var source = path.resolve(__dirname, '../template/');
+
+                file.expand({ dot: true }, path.join(source, '*'))
+                    .forEach(function(p) {
+                        var filename = p.substr(source.length + 1);
+                        var dest     = path.join(pwd, filename);
+                        var content  = initFile(p);
+
+                        if (filename !== '.editorconfig' || !file.exists(dest)) {
+                            file.write(dest, content);
+                        }
+                    });
+
+                // 判断是否需要创建开发文件夹
+                if (!file.exists(appFolder)) {
+                    file.mkdir('app/css/vendor');
+                    file.mkdir('app/css/partials');
+                    file.mkdir('app/js/vendor');
+                    file.mkdir('app/template');
+                    file.mkdir('app/images');
+                    file.mkdir('app/fonts');
+                    file.mkdir('app/media');
+                }
+
+                console.log('Init success!'.green);
+
+                rl.close();
+            });
+        }
+    })
+    .on('serve',  gulptask)
+    .on('build',  gulptask)
+    .on('deploy', gulptask)
+    .on('pack',   gulptask);
+
+program
+    .parse(process.argv);
