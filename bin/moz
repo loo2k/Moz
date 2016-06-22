@@ -11,6 +11,9 @@ var argv     = process.argv.slice(2);
 var conf     = require('../config/config.js');
 var colors   = require('colors');
 
+// 禁用 file-utils 日志
+file.option('logger', { warn: function() {}, write: function() {} });
+
 // 检查更新
 require('../update.js');
 
@@ -64,13 +67,14 @@ program
 
                 // 判断是否需要创建开发文件夹
                 if (!file.exists(appFolder)) {
-                    file.mkdir('app/css/vendor');
-                    file.mkdir('app/css/partials');
-                    file.mkdir('app/js/vendor');
-                    file.mkdir('app/template');
-                    file.mkdir('app/images');
-                    file.mkdir('app/fonts');
-                    file.mkdir('app/media');
+                    file.mkdir(conf.app + '/css/vendor');
+                    file.mkdir(conf.app + '/css/partials');
+                    file.mkdir(conf.app + '/js/vendor');
+                    file.mkdir(conf.app + '/template');
+                    file.mkdir(conf.app + '/images');
+                    file.mkdir(conf.app + '/fonts');
+                    file.mkdir(conf.app + '/media');
+                    file.write(conf.parsePwd(conf.app + '/index.html', ''));
                 }
 
                 console.log('Init success!'.green);
