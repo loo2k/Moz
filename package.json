@@ -17,6 +17,7 @@
     "commander": "^2.9.0",
     "del": "^2.0.2",
     "file-utils": "^0.2.2",
+    "findup-sync": "^0.4.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-clean-css": "^2.0.9",

@@ -6,10 +6,22 @@ var swig     = require('swig');
 var program  = require('commander');
 var readline = require('readline');
 var file     = require('file-utils');
-var pwd      = process.env.pwd = path.resolve('.');
+var findup   = require('findup-sync');
 var argv     = process.argv.slice(2);
-var conf     = require('../config/config.js');
 var colors   = require('colors');
+
+// 获得运行目录
+var pwd;
+var configFile = findup('moz.json');
+if (configFile !== null) {
+    var configPath = path.parse(configFile);
+    pwd = process.env.pwd = configPath['dir'];
+} else {
+    pwd = process.env.pwd = path.resolve('.');
+}
+
+// 获取 Moz 配置文件
+var conf = require('../config/config.js');
 
 // 禁用 file-utils 日志
 file.option('logger', { warn: function() {}, write: function() {} });
