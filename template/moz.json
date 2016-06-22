@@ -6,7 +6,10 @@
     },
     "build": {
         "hash": true,
-        "compress": true
+        "compress": {
+            "css": true,
+            "js": true
+        }
     },
     "ftp": {
         "host": "",

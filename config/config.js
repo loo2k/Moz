@@ -26,7 +26,10 @@ var config = {
     // 编译配置
     build: {
         hash: true,
-        compress: true,
+        compress: {
+            css: true,
+            js: true
+        },
         templateVars: {}
     },
 
