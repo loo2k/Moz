@@ -37,6 +37,7 @@
     "highlight.js": "^8.8.0",
     "merge-stream": "^1.0.0",
     "moment": "^2.10.6",
+    "readline-sync": "^1.4.4",
     "semver": "^5.1.0",
     "stream-combiner2": "^1.0.2",
     "swig": "^1.4.2",

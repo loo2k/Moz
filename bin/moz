@@ -4,10 +4,9 @@ var pkg      = require('../package.json');
 var path     = require('path');
 var swig     = require('swig');
 var program  = require('commander');
-var readline = require('readline');
+var readline = require('readline-sync');
 var file     = require('file-utils');
 var findup   = require('findup-sync');
-var argv     = process.argv.slice(2);
 var colors   = require('colors');
 
 // 获得运行目录
@@ -52,47 +51,39 @@ program
         if (file.exists(configJson)) {
             console.log('%s is already exists!', 'moz.json'.red);
         } else {
-            var rl = readline.createInterface({
-                input: process.stdin,
-                output: process.stdout
-            });
+            var answer = readline.question('What is you project name: ');
+            var source = path.resolve(__dirname, '../template/');
 
-            rl.question('What is you project name: ', function(answer) {
-                function initFile(tmpl) {
-                    return swig.renderFile(tmpl, {
-                        name: answer
-                    });
-                }
+            function initFile(tmpl) {
+                return swig.renderFile(tmpl, {
+                    name: answer
+                });
+            }
 
-                var source = path.resolve(__dirname, '../template/');
+            file.expand({ dot: true }, path.join(source, '*'))
+                .forEach(function(p) {
+                    var filename = p.substr(source.length + 1);
+                    var dest     = path.join(pwd, filename);
+                    var content  = initFile(p);
 
-                file.expand({ dot: true }, path.join(source, '*'))
-                    .forEach(function(p) {
-                        var filename = p.substr(source.length + 1);
-                        var dest     = path.join(pwd, filename);
-                        var content  = initFile(p);
+                    if (filename !== '.editorconfig' || !file.exists(dest)) {
+                        file.write(dest, content);
+                    }
+                });
 
-                        if (filename !== '.editorconfig' || !file.exists(dest)) {
-                            file.write(dest, content);
-                        }
-                    });
+            // 判断是否需要创建开发文件夹
+            if (!file.exists(appFolder)) {
+                file.mkdir(conf.app + '/css/vendor');
+                file.mkdir(conf.app + '/css/partials');
+                file.mkdir(conf.app + '/js/vendor');
+                file.mkdir(conf.app + '/template');
+                file.mkdir(conf.app + '/images');
+                file.mkdir(conf.app + '/fonts');
+                file.mkdir(conf.app + '/media');
+                file.write(conf.parsePwd(conf.app + '/index.html', ''));
+            }
 
-                // 判断是否需要创建开发文件夹
-                if (!file.exists(appFolder)) {
-                    file.mkdir(conf.app + '/css/vendor');
-                    file.mkdir(conf.app + '/css/partials');
-                    file.mkdir(conf.app + '/js/vendor');
-                    file.mkdir(conf.app + '/template');
-                    file.mkdir(conf.app + '/images');
-                    file.mkdir(conf.app + '/fonts');
-                    file.mkdir(conf.app + '/media');
-                    file.write(conf.parsePwd(conf.app + '/index.html', ''));
-                }
-
-                console.log('Init success!'.green);
-
-                rl.close();
-            });
+            console.log('Init success!'.green);
         }
     })
     .on('serve',  gulptask)
