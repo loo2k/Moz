@@ -1,11 +1,11 @@
 ## Moz
 
-[![npm](https://img.shields.io/npm/dt/moz.svg?maxAge=2592000)]()
-[![Travis](https://img.shields.io/travis/loo2k/Moz.svg?maxAge=2592000)]()
+[![npm](https://img.shields.io/npm/dt/moz.svg?maxAge=2592000)](https://www.npmjs.com/package/moz)
+[![Travis](https://img.shields.io/travis/loo2k/Moz.svg?maxAge=2592000)](https://travis-ci.org/loo2k/Moz)
 
 ## 关于 Moz
 
-- Moz 集成了前端开发中调试，构建，部署，编译等一系列开发流程，帮助开发者提高开发效率；
+Moz 集成了前端开发中调试，构建，部署，编译等一系列开发流程，帮助开发者提高开发效率；
 
 ## 使用指北
 
@@ -29,31 +29,35 @@ moz init
 ```shell
 .
 ├── app                 // 开发文件文件夹
-│   ├── css             // 样式文件 \*.less \*.css
+│   ├── css             // 样式文件 *.less *.css
 │   │   ├── partials
+│   │   └── vendor
+│   ├── js              // 脚本文件夹
 │   │   └── vendor
 │   ├── fonts           // 字体文件夹
 │   ├── images          // 图片文件夹
-│   ├── js              // 脚本文件夹
-│   │   └── vendor
 │   ├── media           // 媒体文件夹
-│   └── template        // 模版文件夹
+│   ├── template        // 模版文件夹
+│   └── index.html
 └── moz.json            // Moz 配置文件
 ```
 
 #### 初始化配置文件
 ```json
 {
-    "name": "Moz",             
-    "serve": {                 
-        "port": 8088,          
-        "index": "index.html"  
+    "name": "Moz",
+    "serve": {
+        "port": 8088,
+        "index": "index.html"
     },
-    "build": {                 
-        "hash": true,          
-        "compress": true       
+    "build": {
+        "hash": true,
+        "compress": {
+            "css": true,
+            "js": true
+        }
     },
-    "ftp": {                   
+    "ftp": {
         "host": "",
         "user": "",
         "pass": "",
@@ -61,7 +65,10 @@ moz init
         "path": "/"
     }
 }
+
 ```
+
+*提示: `ftp.pass` 属性允许留空，在执行 `deploy` 任务时将提示输入密码 :P*
 
 ### 本地调试
 
@@ -69,7 +76,7 @@ moz init
 moz serve
 ```
 
-运行后将会在项目文件夹启动一个`browser-sync`的静态文件服务器，实时编译`less`和`swig`模版并自动刷新。
+运行后将会在项目文件夹启动一个 `browser-sync` 的静态文件服务器，实时编译 `less` 和 `swig`模版并自动刷新。
 
 ### 编译静态文件
 
