@@ -1,6 +1,6 @@
 {
   "name": "moz",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Moz is a usefull front-end workflow helps you improve your development time.",
   "main": "bin/moz",
   "bin": {
@@ -26,7 +26,6 @@
     "gulp-if": "^2.0.0",
     "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^1.0.0-rc.1",
-    "gulp-newer": "^1.1.0",
     "gulp-rev-all": "^0.8.22",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-swig": "^0.7.4",
