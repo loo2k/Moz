@@ -23,7 +23,7 @@ npm install moz -g
 moz init
 ```
 
-在项目文件夹使用 moz 初始化项目，初始化完成之后将会生成 moz 项目的目录结构以及配置文件 `moz.json`。
+在项目文件夹使用 moz 初始化项目，初始化完成之后将会生成 moz 项目的目录结构以及配置文件 `moz.js`。
 
 #### 初始化目录结构
 ```shell
@@ -39,32 +39,32 @@ moz init
 │   ├── media           // 媒体文件夹
 │   ├── template        // 模版文件夹
 │   └── index.html
-└── moz.json            // Moz 配置文件
+└── moz.js              // Moz 配置文件
 ```
 
 #### 初始化配置文件
-```json
-{
-    "name": "Moz",
-    "serve": {
-        "port": 8088,
-        "index": "index.html"
+```js
+module.exports = {
+    name: 'Moz',
+    serve: {
+        port: 8808,
+        index: 'index.html'
     },
-    "build": {
-        "hash": true,
-        "compress": {
-            "css": true,
-            "js": true
+    build: {
+        hash: true,
+        compress: {
+            css: true,
+            js: true
         }
     },
-    "ftp": {
-        "host": "",
-        "user": "",
-        "pass": "",
-        "port": 21,
-        "path": "/"
+    ftp: {
+        host: '',
+        user: '',
+        pass: '',
+        path: '/'
     }
 }
+
 
 ```
 

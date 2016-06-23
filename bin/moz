@@ -11,7 +11,7 @@ var colors   = require('colors');
 
 // 获得运行目录
 var pwd;
-var configFile = findup('moz.json');
+var configFile = findup('moz.js');
 if (configFile !== null) {
     var configPath = path.parse(configFile);
     pwd = process.env.pwd = configPath['dir'];
@@ -45,11 +45,11 @@ program
     .command('pack',   'pack compiled files to a zip')
     .on('init', function() {
         // 判断是否已经存在配置文件
-        var configJson = conf.parsePwd('moz.json');
+        var configJson = conf.parsePwd('moz.js');
         var appFolder  = conf.parsePwd(conf.app);
 
         if (file.exists(configJson)) {
-            console.log('%s is already exists!', 'moz.json'.red);
+            console.log('%s is already exists!', 'moz.js'.red);
         } else {
             var answer = readline.question('What is you project name: ');
             var source = path.resolve(__dirname, '../template/');
