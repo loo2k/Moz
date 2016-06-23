@@ -4,9 +4,6 @@
 dist
 node_modules
 
-# Config File #
-update.json
-
 # OS generated files #
 .DS_Store
 .DS_Store?
