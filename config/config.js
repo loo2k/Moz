@@ -155,8 +155,8 @@ var config = {
 }
 
 // 获取用户的配置文件
-if (file.exists( config.parsePwd('moz.js') )) {
-    config = _.extend(config, require( config.parsePwd('moz.js') ));
+if (file.exists( config.parsePwd('moz.config.js') )) {
+    config = _.extend(config, require( config.parsePwd('moz.config.js') ));
 }
 
 module.exports = config;
