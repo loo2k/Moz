@@ -25,7 +25,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         return gulp.src(conf.parsePwd(conf.revFiles), { base: conf.parsePwd(conf.tmp) })
             .pipe($.if(conf.build.hash, revAll.revision()))
             .pipe(gulp.dest(conf.parsePwd(conf.dist)))
-            .pipe($.if(conf.build.hash, revAll.versionFile()))
-            .pipe($.if(conf.build.hash, gulp.dest(conf.parsePwd(conf.tmp))));
+            .pipe($.if(conf.build.hash && revAll.revisioner.files.length > 0, revAll.versionFile()))
+            .pipe($.if(conf.build.hash && revAll.revisioner.files.length > 0, gulp.dest(conf.parsePwd(conf.tmp))));
     });
 }
