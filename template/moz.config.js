@@ -6,6 +6,7 @@ module.exports = {
     },
     build: {
         hash: true,
+        compatibility: 'ie7',
         compress: {
             css: true,
             js: true

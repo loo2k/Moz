@@ -30,6 +30,7 @@ var config = {
             css: true,
             js: true
         },
+        compatibility: 'ie7',
         templateVars: {}
     },
 
@@ -58,7 +59,8 @@ var config = {
     staticFiles       : [
         path.join(pathConf.app, '/fonts/**/*'),
         path.join(pathConf.app, '/images/**/*'),
-        path.join(pathConf.app, '/media/**/*')
+        path.join(pathConf.app, '/media/**/*'),
+        path.join(pathConf.app, '/css/**/*.css')
     ],
 
     // 需编译样式文件
