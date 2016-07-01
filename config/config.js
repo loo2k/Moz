@@ -30,7 +30,6 @@ var config = {
             css: true,
             js: true
         },
-        compatibility: 'ie7',
         templateVars: {}
     },
 
