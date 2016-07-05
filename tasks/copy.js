@@ -5,6 +5,7 @@
  */
 
 var combiner = require('stream-combiner2');
+var mozRevAll = require('moz-rev-all');
 
 module.exports = function(gulp, $, conf, browserSync) {
     gulp.task('copy:tmp', function() {
@@ -13,7 +14,7 @@ module.exports = function(gulp, $, conf, browserSync) {
     });
 
     gulp.task('copy:dist', function() {
-        var revAll = new $.revAll({
+        var revAll = new mozRevAll({
             hashLength          : 4,
             fileNameManifest    : 'manifest.json',
             dontGlobal          : conf.revIgnore,
