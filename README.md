@@ -47,7 +47,7 @@ moz init
 module.exports = {
     name: 'Moz',
     serve: {
-        port: 8808,
+        port: 8080,
         index: 'index.html'
     },
     build: {

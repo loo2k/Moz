@@ -1,5 +1,5 @@
 module.exports = {
-    name: '{{ name }}',
+    name: 'moz-test',
     serve: {
         port: 8080,
         index: 'index.html'
