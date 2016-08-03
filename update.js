@@ -1,4 +1,5 @@
 var cp     = require('child_process');
+var fs     = require('fs');
 var pkg    = require('./package.json');
 var file   = require('file-utils');
 var path   = require('path');
@@ -15,30 +16,35 @@ file.option('logger', { warn: function() {}, write: function() {} });
 
 // 如果有更新信息文件则加载
 if (file.exists(updateFile)) {
-    updateInfo = require(updateFile);
-}
+    // 检查是否有更新文件权限
+    fs.access(updateFile, fs.R_OK | fs.W_OK, function(err) {
+        if (!err) {
+            updateInfo = require(updateFile);
 
-// 超过一天则检查更新
-if (updateTime - updateInfo.timestamp > 86400) {
+            // 超过一天则检查更新
+            if (updateTime - updateInfo.timestamp > 86400) {
 
-    var args = [
-        'info',
-        'moz',
-        'version',
-        '--registry=https://registry.npm.taobao.org'
-    ];
-    var result = cp.spawnSync('npm', args, { timeout: 1000 });
-    if (!result.error) {
-        var currentVer = pkg.version;
-        var latestVer  = result.stdout.toString().trim();
+                var args = [
+                    'info',
+                    'moz',
+                    'version',
+                    '--registry=https://registry.npm.taobao.org'
+                ];
+                var result = cp.spawnSync('npm', args, { timeout: 1000 });
+                if (!result.error) {
+                    var currentVer = pkg.version;
+                    var latestVer  = result.stdout.toString().trim();
 
-        if (semver.neq(currentVer, latestVer)) {
-            showUpdateHint(currentVer, latestVer);
+                    if (semver.neq(currentVer, latestVer)) {
+                        showUpdateHint(currentVer, latestVer);
+                    }
+                }
+
+                // 写入更新记录
+                file.write(updateFile, JSON.stringify({timestamp: updateTime}));
+            }
         }
-    }
-
-    // 写入更新记录
-    file.write(updateFile, JSON.stringify({timestamp: updateTime}));
+    });
 }
 
 // 显示更新提示
