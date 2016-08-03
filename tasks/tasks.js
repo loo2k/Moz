@@ -29,6 +29,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         browserSync.init({
             ui: false,
             open: "external",
+            startPath: conf.serve.open,
             port: conf.serve.port,
             notify: false,
             server: {

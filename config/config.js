@@ -20,6 +20,7 @@ var config = {
     // 调试服务器配置
     serve: {
         port: 8099,
+        open: '/',
         index: 'index.html'
     },
 
