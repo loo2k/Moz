@@ -51,12 +51,7 @@ program
         if (file.exists(configJson)) {
             console.log('%s is already exists!', 'moz.config.js'.red);
         } else {
-            var answer = '';
-            if(process.argv[3] === '-p') {
-                answer = process.argv[3]
-            } else {
-                answer = readline.question('What is you project name: ');
-            }
+            var answer = readline.question('What is you project name: ');
             var source = path.resolve(__dirname, '../template/');
 
             function initFile(tmpl) {
