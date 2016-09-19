@@ -91,6 +91,11 @@ var config = {
         path.join(pathConf.app, '/**/*.html')
     ],
 
+    // 需要监听的脚本文件
+    scriptFiles4Watch: [
+        path.join(pathConf.app, '/js/**/*.js')
+    ],
+
     // rev 需要拷贝的文件
     revFiles          : path.join(pathConf.tmp, '/**'),
 

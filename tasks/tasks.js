@@ -20,7 +20,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         });
 
         // 监听脚本文件变化
-        $.watch(conf.parsePwd(conf.scriptFiles), function(evt) {
+        $.watch(conf.parsePwd(conf.scriptFiles4Watch), function(evt) {
             conf.gwChangeHandler(evt);
             gulp.start('scripts');
         });
