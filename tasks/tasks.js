@@ -14,16 +14,22 @@ module.exports = function(gulp, $, conf, browserSync) {
         ['scripts', 'styles', 'template']
     ]), function() {
         // 监听样式文件变化
-        gulp.watch(conf.parsePwd(conf.stylesFiles4Watch), ['styles'])
-            .on('change', function(evt) { conf.changeHandler(evt); });
+        $.watch(conf.parsePwd(conf.stylesFiles4Watch), function(evt) {
+            conf.gwChangeHandler(evt);
+            gulp.start('styles');
+        });
 
         // 监听脚本文件变化
-        gulp.watch(conf.parsePwd(conf.scriptFiles), ['scripts'])
-            .on('change', function(evt) { conf.changeHandler(evt); });
+        $.watch(conf.parsePwd(conf.scriptFiles), function(evt) {
+            conf.gwChangeHandler(evt);
+            gulp.start('scripts');
+        });
 
         // 监听模版文件变化
-        gulp.watch(conf.parsePwd(conf.tmplFiles4Watch), ['template'])
-            .on('change', function(evt) { conf.changeHandler(evt); });
+        $.watch(conf.parsePwd(conf.tmplFiles4Watch), function(evt) {
+            conf.gwChangeHandler(evt);
+            gulp.start('template');
+        });
 
         // 启动本地调试服务器
         browserSync.init({

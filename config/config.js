@@ -132,6 +132,13 @@ var config = {
         gutil.log('File:', gutil.colors.cyan(filename), 'was', gutil.colors.magenta(evt.type));
     },
 
+    // gulp-wather 回调处理器
+    gwChangeHandler: function(evt) {
+        var file = evt.path.split('/');
+        var filename = file[file.length - 1];
+        gutil.log('File:', gutil.colors.cyan(filename), 'was', gutil.colors.magenta(evt.event));
+    },
+
     // 解析运行环境的目录
     parsePwd: function(pwd) {
         var parsedPwd;
