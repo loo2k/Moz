@@ -10,6 +10,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         return gulp.src(conf.parsePwd(conf.scriptFiles), { base: conf.parsePwd(conf.app) })
             .pipe($.if(!conf.isProduction, $.sourcemaps.init()))
             .pipe($.if(conf.isProduction && compress, $.uglify()))
+                .on('error', conf.errorHandler('Uglify'))
             .pipe($.if(!conf.isProduction, $.sourcemaps.write()))
             .pipe(gulp.dest(conf.parsePwd(conf.tmp)))
             .pipe(browserSync.stream());
