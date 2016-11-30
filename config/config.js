@@ -119,7 +119,7 @@ var config = {
     ],
 
     // 判断是否为生产环境
-    isProduction      : process.argv.slice(2) !== 'serve',
+    isProduction      : process.argv[2] !== 'serve',
 
     // 错误处理函数
     errorHandler: function(title) {
