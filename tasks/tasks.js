@@ -40,7 +40,12 @@ module.exports = function(gulp, $, conf, browserSync) {
             notify: false,
             server: {
                 baseDir: conf.parsePwd([conf.tmp, conf.app]),
-                index: conf.serve.index
+                index: conf.serve.index,
+                // Enable CORS
+                middleware: function (req, res, next) {
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    next();
+                }
             }
         })
     });
