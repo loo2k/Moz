@@ -53,7 +53,8 @@ module.exports = function(gulp, $, conf, browserSync) {
     // 发布任务 gulp build
     gulp.task('build', gs.sync([
         ['clean:tmp', 'clean:dist'],
-        ['scripts', 'styles', 'template', 'copy:tmp'],
+        ['scripts', 'styles', 'template'],
+        'copy:tmp',
         'copy:dist'
     ]));
 }

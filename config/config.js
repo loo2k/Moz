@@ -97,7 +97,7 @@ var config = {
     ],
 
     // rev 需要拷贝的文件
-    revFiles          : path.join(pathConf.tmp, '/**'),
+    revFiles          : path.join(pathConf.tmp, '/**/*'),
 
     // rev 需要忽略的文件
     revIgnore         : [
