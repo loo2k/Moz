@@ -9,7 +9,7 @@ before_script:
   - cd test
 node_js:
   - "4"
-  - "iojs"
+  - "6"
   - "node"
 script:
   moz build
