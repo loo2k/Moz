@@ -43,7 +43,7 @@ program
     .command('build',  'complie the development files')
     .command('deploy', 'deploy compiled files to ftp server')
     .command('pack',   'pack compiled files to a zip')
-    .on('init', function() {
+    .on('command:init', function() {
         // 判断是否已经存在配置文件
         var configJson = conf.parsePwd('moz.config.js');
         var appFolder  = conf.parsePwd(conf.app);
@@ -86,10 +86,10 @@ program
             console.log('Init success!'.green);
         }
     })
-    .on('serve',  gulptask)
-    .on('build',  gulptask)
-    .on('deploy', gulptask)
-    .on('pack',   gulptask);
+    .on('command:serve',  gulptask)
+    .on('command:build',  gulptask)
+    .on('command:deploy', gulptask)
+    .on('command:pack',   gulptask);
 
 program
     .parse(process.argv);
