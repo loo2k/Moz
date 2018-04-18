@@ -3,6 +3,7 @@
 .tmp
 dist
 node_modules
+update.json
 
 # OS generated files #
 .DS_Store

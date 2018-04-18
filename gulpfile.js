@@ -11,7 +11,7 @@ var $           = require('gulp-load-plugins')();
 var conf        = require('./config/config.js');
 
 // 加载 gulp 任务
-var tasks = fs.readdirSync('./tasks/');
+const tasks = fs.readdirSync('./tasks/')
 tasks.forEach(function(task) {
     require('./tasks/' + task)(gulp, $, conf, browserSync);
 });
