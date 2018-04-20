@@ -11,7 +11,8 @@ module.exports = function(gulp, $, conf, browserSync) {
     // 开发任务 gulp --dev
     gulp.task('serve', gs.sync([
         'clean:tmp',
-        ['scripts', 'styles', 'template']
+        ['scripts', 'styles', 'template'],
+        ['rollup']
     ]), function() {
         // 监听样式文件变化
         $.watch(conf.parsePwd(conf.stylesFiles4Watch), function(evt) {
@@ -20,10 +21,14 @@ module.exports = function(gulp, $, conf, browserSync) {
         });
 
         // 监听脚本文件变化
-        $.watch(conf.parsePwd(conf.scriptFiles4Watch), function(evt) {
-            conf.gwChangeHandler(evt);
-            gulp.start('scripts');
+        $.watch(conf.parsePwd(conf.scriptFiles4Watch), (evt) => {
+            conf.gwChangeHandler(evt)
+            gulp.start(gs.sync(['scripts', 'rollup']));
         });
+        // $.watch(conf.parsePwd(conf.scriptFiles4Watch), function(evt) {
+        //     conf.gwChangeHandler(evt);
+        //     gulp.start('scripts');
+        // });
 
         // 监听模版文件变化
         $.watch(conf.parsePwd(conf.tmplFiles4Watch), function(evt) {
@@ -54,6 +59,7 @@ module.exports = function(gulp, $, conf, browserSync) {
     gulp.task('build', gs.sync([
         ['clean:tmp', 'clean:dist'],
         ['scripts', 'styles', 'template'],
+        ['rollup'],
         'copy:tmp',
         'copy:dist'
     ]));

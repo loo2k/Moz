@@ -96,6 +96,9 @@ var config = {
         path.join(pathConf.app, '/js/**/*.js')
     ],
 
+    // 需要 ES6 模块支持的文件
+    es6Files: [],
+
     // rev 需要拷贝的文件
     revFiles          : path.join(pathConf.tmp, '/**/*'),
 
