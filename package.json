@@ -1,6 +1,6 @@
 {
   "name": "moz",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Moz is a front-end workflow build for static page.",
   "main": "bin/moz",
   "bin": {
