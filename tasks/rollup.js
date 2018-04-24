@@ -13,7 +13,10 @@ const babelConfig = {
     babelrc: false,
     presets: [[require('babel-preset-env'), {
         modules: false
-    }]]
+    }]],
+    plugins: [
+        require('babel-plugin-external-helpers')
+    ]
 }
 
 module.exports = function(gulp, $, conf, browserSync) {
