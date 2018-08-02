@@ -10,7 +10,8 @@ estPlugin = new est();
 module.exports = function(gulp, $, conf, browserSync) {
     gulp.task('styles', function() {
         var compress = conf.build.compress !== true ? !!conf.build.compress.css : true;
-        return gulp.src(conf.parsePwd(conf.styleFiles), { base: conf.parsePwd(conf.app) })
+        var styleFiles = process.env.styleFile ? process.env.styleFile : conf.parsePwd(conf.styleFiles);
+        return gulp.src(styleFiles, { base: conf.parsePwd(conf.app) })
             .pipe($.if(!conf.isProduction, $.sourcemaps.init()))
             .pipe($.less({javascriptEnabled: true, plugins: [estPlugin]}))
                 .on('error', conf.errorHandler('Less'))

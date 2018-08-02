@@ -4,7 +4,23 @@
  * @date 2016-03-24
  */
 
+var minimatch = require('minimatch');
 var combiner = require('stream-combiner2');
+
+function minimatchTester(rules, path) {
+    var match = false
+    if (Array.isArray(rules)) {
+        rules.map(function(rule) {
+        if (minimatch(path, rule, { nonegate: true })) {
+            match = true
+        }
+        })
+    } else {
+        match = minimatch(rules, path, { nonegate: true })
+    }
+
+    return match
+}
 
 module.exports = function(gulp, $, conf, browserSync) {
     var gs = $.sync(gulp);
@@ -17,6 +33,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         // 监听样式文件变化
         $.watch(conf.parsePwd(conf.stylesFiles4Watch), function(evt) {
             conf.gwChangeHandler(evt);
+            process.env.styleFile = minimatchTester(conf.parsePwd(conf.styleFiles), evt.path) ? evt.path : '';
             gulp.start('styles');
         });
 
@@ -43,6 +60,7 @@ module.exports = function(gulp, $, conf, browserSync) {
             startPath: conf.serve.open,
             port: conf.serve.port,
             notify: false,
+            ghostMode: false,
             server: {
                 baseDir: conf.parsePwd([conf.tmp, conf.app]),
                 index: conf.serve.index,

@@ -89,7 +89,8 @@ program
     .on('command:serve',  gulptask)
     .on('command:build',  gulptask)
     .on('command:deploy', gulptask)
-    .on('command:pack',   gulptask);
+    .on('command:pack',   gulptask)
+    .on('command:*', gulptask);
 
 program
     .parse(process.argv);
