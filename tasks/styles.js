@@ -4,8 +4,10 @@
  * @date 2016-03-24
  */
 
-est = require('less-plugin-est');
-estPlugin = new est();
+const est = require('less-plugin-est');
+const LessFuntion = require('less-plugin-functions');
+const estPlugin = new est();
+const LessFuntionPlugin = new LessFuntion();
 
 module.exports = function(gulp, $, conf, browserSync) {
     gulp.task('styles', function() {
@@ -13,7 +15,7 @@ module.exports = function(gulp, $, conf, browserSync) {
         var styleFiles = process.env.styleFile ? process.env.styleFile : conf.parsePwd(conf.styleFiles);
         return gulp.src(styleFiles, { base: conf.parsePwd(conf.app) })
             .pipe($.if(!conf.isProduction, $.sourcemaps.init()))
-            .pipe($.less({javascriptEnabled: true, plugins: [estPlugin]}))
+            .pipe($.less({javascriptEnabled: true, plugins: [LessFuntionPlugin, estPlugin]}))
                 .on('error', conf.errorHandler('Less'))
             .pipe($.autoprefixer({ cascade: false }))
                 .on('error', conf.errorHandler('Autoprefixer'))

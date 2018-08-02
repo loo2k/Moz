@@ -40,6 +40,7 @@
     "highlight.js": "^9.12.0",
     "less": "2.7.1",
     "less-plugin-est": "^2.0.5",
+    "less-plugin-functions": "^1.0.0",
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.4",
     "moment": "^2.10.6",
