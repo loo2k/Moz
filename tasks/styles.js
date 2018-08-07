@@ -17,7 +17,14 @@ module.exports = function(gulp, $, conf, browserSync) {
             .pipe($.if(!conf.isProduction, $.sourcemaps.init()))
             .pipe($.less({javascriptEnabled: true, plugins: [LessFuntionPlugin, estPlugin]}))
                 .on('error', conf.errorHandler('Less'))
-            .pipe($.autoprefixer({ cascade: false }))
+            .pipe($.autoprefixer({
+                cascade: false,
+                browsers: [
+                    "last 1 version",
+                    "> 1%",
+                    "IE 9"
+                ]
+            }))
                 .on('error', conf.errorHandler('Autoprefixer'))
             .pipe($.if(conf.isProduction && compress, $.cleanCss({compatibility: 'ie7'})))
             .pipe($.if(!conf.isProduction, $.sourcemaps.write()))
